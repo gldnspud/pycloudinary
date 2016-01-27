@@ -236,7 +236,7 @@ class MultipartParam(object):
         else:
             value = self.value
 
-        if re.search("^--%s$" % re.escape(boundary), value, re.M):
+        if re.search(to_bytes("^--%s$" % re.escape(boundary)), value, re.M):
             raise ValueError("boundary found in encoded string")
 
         return "%s%s\r\n" % (self.encode_hdr(boundary), value)
