@@ -195,9 +195,7 @@ def call_api(action, params, http_headers={}, return_error=False, unsigned=False
 
         datagen, headers = multipart_encode(param_list)
         
-        if _is_gae():
-            # Might not be needed in the future but for now this is needed in GAE
-            datagen = "".join(datagen)
+        datagen = b"".join(datagen)
 
         request = urllib2.Request(api_url, datagen, headers)
         request.add_header("User-Agent", cloudinary.get_user_agent())
