@@ -227,7 +227,7 @@ class MultipartParam(object):
         headers.append("")
         headers.append("")
 
-        return "\r\n".join(headers)
+        return "\r\n".join(headers).encode('utf8')
 
     def encode(self, boundary):
         """Returns the string encoding of this parameter"""
@@ -239,7 +239,7 @@ class MultipartParam(object):
         if re.search(to_bytes("^--%s$" % re.escape(boundary)), value, re.M):
             raise ValueError("boundary found in encoded string")
 
-        return "%s%s\r\n" % (self.encode_hdr(boundary), value)
+        return b"%s%s\r\n" % (self.encode_hdr(boundary), value)
 
     def iter_encode(self, boundary, blocksize=4096):
         """Yields the encoding of this parameter
