@@ -11,7 +11,7 @@ if PY3:
     HTTPError = urllib.error.HTTPError
     from io import StringIO, BytesIO
     from urllib.parse import urlencode, unquote, urlparse, parse_qs, quote_plus
-    to_bytes = lambda s: s.encode('utf8')
+    to_bytes = lambda s: s if isinstance(s, bytes) else s.encode('utf8')
     to_bytearray = lambda s: bytearray(s, 'utf8')
     to_string = lambda b: b.decode('utf8')
     string_types = (str)
